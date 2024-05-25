@@ -9,24 +9,21 @@ import dev.divyanshgemini.cookmate.databinding.ActivityRecipeListBinding
 
 class RecipeListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecipeListBinding
-    private val recipeViewModel: RecipeListViewModel by viewModels()
+    private val viewModel: RecipeListViewModel by viewModels()
     private lateinit var recipeAdapter: RecipeListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i("TAG", "RecipeListActivity :: onCreate")
         super.onCreate(savedInstanceState)
         binding = ActivityRecipeListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupRecyclerView()
 
-        recipeViewModel.getRecipes("").observe(this) { recipes ->
+        // Observe recipes & update UI
+        viewModel.getRecipes("").observe(this) { recipes ->
             if (recipes != null) {
-                Log.i("TAG", "RecipeListActivity :: onCreate: recipes --> $recipes")
                 recipeAdapter.setRecipes(recipes)
             }
-            else
-                Log.i("TAG", "RecipeListActivity :: onCreate: recipes is null")
         }
     }
 

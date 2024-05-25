@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Add onFocusChangeListener to clear error when input box is touched
+        // Add onTouchListener to clear error when input box is touched
         setOnTouchListener(binding.editTextEmail, binding.textInputLayoutEmail)
         setOnTouchListener(binding.editTextPassword, binding.textInputLayoutPassword)
 
@@ -60,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        // Show error message if any
         loginViewModel.errorMessage.observe(this) { message ->
             message?.let {
                 Snackbar.error(binding.root, applicationContext, it).show()

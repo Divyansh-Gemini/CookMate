@@ -10,35 +10,54 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import dev.divyanshgemini.cookmate.BuildConfig
+import dev.divyanshgemini.cookmate.data.model.RecipeInformationResponse
 
 class RecipeRepository {
     private val recipes = mutableListOf<Recipe>()
-    private val mutableLiveData = MutableLiveData<List<Recipe>>()
+    private val recipesMutableLiveData = MutableLiveData<List<Recipe>>()
+
+    private val recipeInformation = mutableListOf<RecipeInformationResponse>()
+    private val recipeInformationLiveData = MutableLiveData<List<RecipeInformationResponse>>()
+
+    private val apiKey = BuildConfig.SPOONACULAR_API_KEY
+    private val apiService: SpoonacularApiService = RetrofitInstance.api
+    private val TAG = "RecipeRepository"
 
     suspend fun getSearchedRecipes(query: String): Deferred<MutableLiveData<List<Recipe>>> = withContext(Dispatchers.IO) {
         async {
-            Log.i("TAG", "RecipeRepository :: getSearchedRecipes: $query")
-            val apiKey = BuildConfig.SPOONACULAR_API_KEY
-            val apiService: SpoonacularApiService = RetrofitInstance.api
-
             try {
-                Log.i("TAG", "RecipeRepository :: getSearchedRecipes: try")
                 val response = apiService.getRecipes(apiKey, query, "Vegetarian", "popularity", "eggs")
 
                 if (response.recipes.isNotEmpty()) {
-                    Log.i("TAG", "RecipeRepository :: getSearchedRecipes: response --> $response")
                     recipes.clear()
                     recipes.addAll(response.recipes)
-                    mutableLiveData.postValue(recipes)
+                    recipesMutableLiveData.postValue(recipes)
                 }
-                else
-                    Log.i("TAG", "RecipeRepository :: getSearchedRecipes: response is empty")
             } catch (e: Exception) {
-                Log.e("RecipeRepository", "getSearchedRecipes failed", e)
+                Log.e(TAG, "getSearchedRecipes failed", e)
             }
 
-            Log.i("TAG", "RecipeRepository :: getSearchedRecipes: returning ${mutableLiveData.value}")
-            return@async mutableLiveData
+            return@async recipesMutableLiveData
+        }
+    }
+
+    suspend fun getRecipeInformation(id: Int): Deferred<MutableLiveData<List<RecipeInformationResponse>>> = withContext(Dispatchers.IO) {
+        async {
+            try {
+                val response = apiService.getRecipeInformation(id, apiKey,
+                    includeNutrition = false,
+                    addWinePairing = false,
+                    addTasteData = false
+                )
+
+                recipeInformation.clear()
+                recipeInformation.add(response)
+                recipeInformationLiveData.postValue(listOf(response))
+            } catch (e: Exception) {
+                Log.e(TAG, "getRecipeInformation failed", e)
+            }
+
+            return@async recipeInformationLiveData
         }
     }
 }
