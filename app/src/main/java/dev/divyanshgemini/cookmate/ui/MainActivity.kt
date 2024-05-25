@@ -4,13 +4,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dev.divyanshgemini.cookmate.R
 import dev.divyanshgemini.cookmate.ui.auth.login.LoginActivity
-import dev.divyanshgemini.cookmate.ui.recipe.detail.RecipeDetailActivity
 import dev.divyanshgemini.cookmate.ui.recipe.list.RecipeListActivity
 import dev.divyanshgemini.cookmate.ui.splash.SplashActivity
 

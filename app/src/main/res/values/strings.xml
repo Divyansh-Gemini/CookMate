@@ -9,4 +9,6 @@
     <string name="already_registered_login_here">Already registered? Login here</string>
     <string name="login">Login</string>
     <string name="sign_up">Signup</string>
+    <string name="recipe_image">Recipe Image</string>
+    <string name="recipe_title">Recipe Title</string>
 </resources>

@@ -7,11 +7,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import dev.divyanshgemini.cookmate.R
-import dev.divyanshgemini.cookmate.databinding.ActivityLoginBinding
 import dev.divyanshgemini.cookmate.databinding.ActivitySplashBinding
 import dev.divyanshgemini.cookmate.ui.auth.login.LoginActivity
-import dev.divyanshgemini.cookmate.ui.recipe.detail.RecipeDetailActivity
 import dev.divyanshgemini.cookmate.ui.recipe.list.RecipeListActivity
 
 @SuppressLint("CustomSplashScreen")
