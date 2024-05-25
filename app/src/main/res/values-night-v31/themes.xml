@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.CookMate" parent="Base.Theme.CookMate">
+
+        <!-- Configurations for Splash Screen for Android 12 and above -->
+        <item name="android:windowSplashScreenBackground">@color/zomato</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
+    </style>
+</resources>

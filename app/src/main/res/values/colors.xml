@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="blue">#2E75B6</color>
+    <color name="red">#F44336</color>
+    <color name="green">#4CAF50</color>
+    <color name="yellow">#FFEB3B</color>
+
+    <color name="swiggy">#FFFC8019</color>
+    <color name="zomato">#FFE23744</color>
+    <color name="mcd">#FFFBC817</color>
 </resources>
